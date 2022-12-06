@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ingredientDetails.module.css';
-
+import PropTypes from 'prop-types';
+import dataPropTypes from '../cardsIngredients/cardsIngredients';
 
 
 function IngredientDetails({ data }) {
@@ -41,3 +42,7 @@ function IngredientDetails({ data }) {
 }
 
 export default IngredientDetails;
+
+IngredientDetails.prototype = {
+    data: PropTypes.arrayOf(dataPropTypes.isRequired).isRequired
+}
