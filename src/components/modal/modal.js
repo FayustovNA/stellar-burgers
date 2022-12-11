@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 
-export default function Modal({ open, children, onClose }) {
+export default function Modal({ children, onClose }) {
 
 
     const onModalClose = () => {
@@ -23,8 +23,6 @@ export default function Modal({ open, children, onClose }) {
         window.addEventListener('keydown', closeEsc)
         return () => window.removeEventListener('keydown', closeEsc)
     }, [])
-
-    if (!open) return null
 
     return ReactDOM.createPortal(
         <>

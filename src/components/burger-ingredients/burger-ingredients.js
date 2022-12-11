@@ -42,7 +42,7 @@ function BurgerIngredients({ ingredients }) {
 
     return (
         <section className={styles.maincontaineringr}>
-            <Modal open={isOpen} onClose={handleCloseModal}><IngredientDetails data={fullItem} /></Modal>
+            {isOpen && (<Modal onClose={handleCloseModal}><IngredientDetails data={fullItem} /></Modal>)}
             <h1 className={styles.title}>Соберите бургер</h1>
             <nav className={styles.tab}>
                 <Tab value='bun' active={current === 'bun'} onClick={satTab}> Булки </Tab>

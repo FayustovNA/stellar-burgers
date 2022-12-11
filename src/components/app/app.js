@@ -11,8 +11,11 @@ function App() {
 
   const getData = async () => {
     try {
-      const res = await fetch(url);
-      const data = await res.json();
+      const res = await fetch(url)
+      if (!res.ok) {
+        return Promise.reject(`Ошибка ${res.status}`)
+      }
+      const data = await res.json()
       setIngredients(data.data)
     } catch (error) {
       console.log('Возникла проблема с вашим fetch запросом', error);
@@ -27,10 +30,10 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <section className={styles.mainorderbox}>
+      <main className={styles.mainorderbox}>
         <BurgerIngredients ingredients={ingredients} />
         <BurgerConstructor ingredients={ingredients} />
-      </section>
+      </main>
     </div>
   );
 }

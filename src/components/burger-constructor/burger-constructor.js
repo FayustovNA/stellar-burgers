@@ -69,7 +69,7 @@ function BurgerConstructor({ ingredients }) {
                     </span>
                 </p>
                 <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}> Оформить заказ</Button>
-                <Modal open={isOpen} onClose={handleCloseModal}><OrderDetails /></Modal>
+                {isOpen && (<Modal onClose={handleCloseModal}><OrderDetails /></Modal>)}
             </div>
         </section >
     )

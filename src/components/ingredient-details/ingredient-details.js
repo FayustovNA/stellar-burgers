@@ -9,6 +9,7 @@ function IngredientDetails({ data }) {
     const image = (
         <img src={data.image_large} alt={data.name} />
     );
+    console.log(data)
 
     return (
         <section className={styles.ingredientdetails}>
@@ -42,5 +43,5 @@ function IngredientDetails({ data }) {
 export default IngredientDetails;
 
 IngredientDetails.propTypes = {
-    data: PropTypes.objectOf(dataPropTypes.isRequired).isRequired
+    data: dataPropTypes.isRequired
 }
