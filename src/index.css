@@ -1,0 +1,33 @@
+@font-face {
+  src: url(./fonts/Iceland/Iceland.woff) format('woff');
+  src: url(./fonts/Iceland/Iceland.woff2) format('woff2');
+  font-family: 'Iceland';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url(./fonts/JetBrains/JetBrainsMono-Regular.woff2) format('woff2');
+  font-family: 'JetBrains';
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+@font-face {
+  src: url(./fonts/JetBrains/JetBrainsMono-Bold.woff2) format('woff2');
+  font-family: 'JetBrains';
+  font-style: bold;
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'JetBrains', 'Iceland',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
