@@ -4,7 +4,8 @@ import {
     ADD_BUN,
     UPDATE_OTHER_INGREDIENTS,
 } from '../action/burger-constructor';
-import { ORDER_CHECKOUT_CLEAN } from '../action/order-details'
+import { ORDER_CHECKOUT_CLEAN } from '../action/order-details';
+// import { v4 as uuidv4 } from 'uuid';
 
 
 const initialState = {
@@ -18,10 +19,11 @@ const initialState = {
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_OTHER_INGREDIENTS: {
-
             return {
                 ...state,
-                otherIngredients: [...state.otherIngredients, action.item],
+                otherIngredients: [
+                    ...state.otherIngredients,
+                    { ...action.item, key: action.key },],
                 totalSumm: state.totalSumm + action.item.price,
             };
         }
@@ -43,9 +45,6 @@ export const constructorReducer = (state = initialState, action) => {
                 bun: [action.item],
                 prevBunPrice: action.item.price * 2,
                 totalSumm: state.totalSumm + action.item.price * 2 - state.prevBunPrice,
-                // counters: {
-                //     [action._id]: 2 || 0,
-                // }
             };
         }
         case DELETE_OTHER_INGREDIENTS: {

@@ -70,11 +70,10 @@ function BurgerConstructor({ }) {
 
     const addOtherIngredients = (item) => {
         if (item.type !== 'bun') {
-            // item['key'] = uuidv4();
             dispatch({
                 type: ADD_OTHER_INGREDIENTS,
                 item: item,
-                key: item.key,
+                key: uuidv4(),
             })
         }
     };
@@ -109,13 +108,12 @@ function BurgerConstructor({ }) {
 
                 <div className={styles.burgercomponentslist} ref={dropTarget} style={{ isOver }}>
                     {otherIngredients.length > 0 ? otherIngredients.map((ingredient, index) => {
-                        console.log(ingredient.key)
                         ingredient['key'] = uuidv4();
                         const deleteIngredient = () => {
-                            console.log(ingredient)
                             dispatch({
                                 type: DELETE_OTHER_INGREDIENTS,
                                 item: ingredient,
+                                key: ingredient.key,
                             })
                         }
                         return (
