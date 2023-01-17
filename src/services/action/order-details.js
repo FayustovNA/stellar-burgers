@@ -7,6 +7,7 @@ export const ORDER_CHECKOUT_CLEAN = 'ORDER_CHECKOUT_CLEAN';
 
 
 
+
 export function getOrderDetails(ingredients) {
     return function (dispatch) {
         dispatch({

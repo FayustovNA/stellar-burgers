@@ -13,7 +13,7 @@ import BurgerConstructorItem from '../burger-constructor-item/burger-constructor
 import { v4 as uuidv4 } from 'uuid';
 
 
-function BurgerConstructor({ }) {
+function BurgerConstructor() {
     const { bun, otherIngredients, totalSumm } = useSelector(store => store.maker);
     const isOpenOrd = useSelector(store => store.modal.isOpenOrd);
     const dispatch = useDispatch();

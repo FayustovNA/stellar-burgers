@@ -34,5 +34,6 @@ export default CardIngredient;
 
 CardIngredient.propTypes = {
     data: dataPropTypes.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    counts: PropTypes.number,
 }

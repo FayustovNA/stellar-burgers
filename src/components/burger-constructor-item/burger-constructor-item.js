@@ -5,6 +5,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor-item.module.css'
 import { useDrag, useDrop } from 'react-dnd';
+import PropTypes from 'prop-types';
+import { dataPropTypes } from '../../utils/type.js';
 
 
 function BurgerConstructorItem({ ingredient, handleDelete, index, moveIngredient }) {
@@ -90,3 +92,11 @@ function BurgerConstructorItem({ ingredient, handleDelete, index, moveIngredient
 
 
 export default BurgerConstructorItem
+
+
+BurgerConstructorItem.propTypes = {
+    ingredient: dataPropTypes.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    moveIngredient: PropTypes.func.isRequired,
+    index: PropTypes.number,
+}

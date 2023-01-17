@@ -26,7 +26,7 @@ export const orderNumberReducer = (state = initialState, action) => {
         }
         case ORDER_CHECKOUT_FAILED: {
             return {
-                ...state,
+                orderNumber: [],
                 orderNumberFailed: true,
                 orderNumberRequest: false
             }
