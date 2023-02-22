@@ -1,0 +1,24 @@
+.box {
+    text-align: center;
+    width: 844px;
+    background: #131316;
+    padding: 0;
+    margin: 0 auto 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 916px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: #2F2F37;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
