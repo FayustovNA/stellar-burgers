@@ -1,0 +1,37 @@
+.maincontainer {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    height: 208px;
+    position: relative;
+    cursor: pointer;
+    background-color: none;
+}
+
+.title {
+    composes: text_type_main-default from global;
+    line-height: 24px;
+    margin: auto;
+    min-height: 50px;
+}
+
+.image {
+    width: 240px;
+    height: 120px;
+    margin: auto;
+}
+
+.price {
+    margin: 4px auto 4px;
+    composes: text_type_digits-default from global;
+    display: flex;
+    gap: 10px;
+    height: 25px;
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    right: 5px;
+
+}
