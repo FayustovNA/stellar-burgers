@@ -9,14 +9,18 @@ import { useDispatch } from 'react-redux';
 
 
 function IngredientDetails() {
-    const { id } = useParams();
-    console.log(id)
-
     const ingredients = useSelector((store) => store.ingredients.ingredients);
     console.log(ingredients)
 
+    const { id } = useParams();
+    console.log(id)
+
     const currentIngredient = ingredients.find((item) => item._id === id);
     console.log(currentIngredient);
+
+    if (ingredients.length === 0) {
+        return <h1>Данные загружаются</h1>
+    }
 
     const image = (
         <img src={currentIngredient.image_large} alt={currentIngredient.name} />

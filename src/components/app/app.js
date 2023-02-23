@@ -13,7 +13,6 @@ import ResetPassword from '../../pages/reset-password';
 import Profile from "../../pages/profile"
 import { Routes, Route } from 'react-router-dom';
 import StellarBurgerMain from '../../pages/main-page';
-import IngredientInfo from '../../pages/ingredient-info';
 import FeedOrders from '../../pages/feed';
 import OrderHistory from '../../pages/order-history';
 import LayOut from '../../pages/layout-profile';
@@ -37,7 +36,6 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients())
   }, [])
-  //dispatch
 
 
   const background = location.state?.locationIngredient || location;
@@ -58,8 +56,9 @@ function App() {
       <main className={styles.mainorderbox}>
         <DndProvider backend={HTML5Backend}>
 
-          <Routes location={background || location}>
-            <Route path='/' element={<StellarBurgerMain />} />
+          <Routes location={background}>
+
+            <Route index element={<StellarBurgerMain />} />
             <Route path='login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
             <Route path='register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
             <Route path='forgot-password' element={<ProtectedRoute isUnAuth={true}><ForgotPassword /></ProtectedRoute>} />
@@ -77,6 +76,7 @@ function App() {
             <Route path='feed' element={<FeedOrders />} />
             <Route path='ingredients/:id' element={<IngredientDetails />} />
             <Route path='*' element={<NotFound />} />
+
           </Routes>
 
           {location.state?.locationIngredient &&

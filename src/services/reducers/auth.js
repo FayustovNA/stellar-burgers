@@ -28,10 +28,6 @@ import {
     // GET_USERINFO_REQUEST,
     // GET_USERINFO_SUCCESS,
     // GET_USERINFO_FAILED,
-
-    // TOKEN_REQUEST,
-    // TOKEN_SUCCESS,
-    // TOKEN_FAILED,
 } from '../action/auth';
 
 const initialState = {

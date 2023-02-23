@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Modal({ children, onClose, route }) {
+export default function Modal({ children, onClose }) {
     const { id } = useParams();
 
     const onModalClose = () => {

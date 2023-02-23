@@ -29,10 +29,6 @@ export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
 
-// export const TOKEN_REQUEST = 'TOKEN_REQUEST';
-// export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
-// export const TOKEN_FAILED = 'TOKEN_FAILED';
-
 export const USER_CHECK = 'USER_CHECK';
 
 //Регистрация пользователя

@@ -16,11 +16,11 @@ function BurgerIngredients({ }) {
     //Базовые 
     const dispatch = useDispatch();
     const [current, setCurrent] = useState('bun')
-    const location = useLocation();
+
 
     //Забираем данные из стора
     const ingredients = useSelector(store => store.ingredients.ingredients)
-    console.log(ingredients);
+    // console.log(ingredients);
     const { bun, otherIngredients } = useSelector(store => store.maker);
     // const isOpenIng = useSelector(store => store.modal.isOpenIng)
     // const currentIngredient = useSelector(store => store.current.currentIngredient)
@@ -56,14 +56,14 @@ function BurgerIngredients({ }) {
         })
     }
 
-    const handleCloseModal = () => {
-        dispatch({
-            type: UNSET_INGREDIENTS,
-        })
-        dispatch({
-            type: MODALWINDOW_CLOSE_ING
-        })
-    }
+    // const handleCloseModal = () => {
+    //     dispatch({
+    //         type: UNSET_INGREDIENTS,
+    //     })
+    //     dispatch({
+    //         type: MODALWINDOW_CLOSE_ING
+    //     })
+    // }
 
     //Реализация счетчика
     const allIngredients = useMemo(() => {
@@ -95,6 +95,9 @@ function BurgerIngredients({ }) {
         const element = document.getElementById(tab)
         if (element) element.scrollIntoView({ behavior: 'smooth' })
     }
+
+
+    const location = useLocation();
 
     return (
         <section className={styles.maincontaineringr}>
