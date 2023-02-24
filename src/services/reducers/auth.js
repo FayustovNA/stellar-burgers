@@ -1,5 +1,5 @@
 import {
-    USER_CHECK,
+    USER_CHECK_SUCCESS,
 
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
@@ -24,6 +24,9 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
+
+    USER_AUTH_SUCCESS,
+    USER_AUTH_FAILED,
 
     // GET_USERINFO_REQUEST,
     // GET_USERINFO_SUCCESS,
@@ -52,10 +55,19 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER_CHECK: {
+        case USER_AUTH_SUCCESS:
+        case USER_CHECK_SUCCESS: {
             return {
                 ...state,
+                name: action.user.name,
+                email: action.user.email,
                 isUserCheked: true,
+            };
+        }
+        case USER_AUTH_FAILED: {
+            return {
+                ...state,
+                isUserCheked: false,
             };
         }
         case UPDATE_USERINFO_REQUEST:

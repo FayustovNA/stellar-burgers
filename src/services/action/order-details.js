@@ -1,11 +1,10 @@
 import { mainUrl } from '../../utils/check-response';
 import { checkResponse } from '../../utils/check-response';
+import { getCookie } from '../../utils/utils';
 export const ORDER_CHECKOUT_REQUEST = 'ORDER_CHECKOUT_REQUEST';
 export const ORDER_CHECKOUT_SUCCESS = 'ORDER_CHECKOUT_SUCCESS';
 export const ORDER_CHECKOUT_FAILED = 'ORDER_CHECKOUT_FAILED';
 export const ORDER_CHECKOUT_CLEAN = 'ORDER_CHECKOUT_CLEAN';
-
-
 
 
 export function getOrderDetails(ingredients) {
@@ -17,6 +16,7 @@ export function getOrderDetails(ingredients) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${getCookie('token')}`,
             },
             body: JSON.stringify({
                 ingredients: ingredients,

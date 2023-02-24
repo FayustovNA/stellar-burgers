@@ -1,5 +1,5 @@
 import { checkResponse, mainUrl } from '../../utils/check-response';
-import { setCookie, deleteCookie, getCookie } from '../../utils/utils';
+import { setCookie, deleteCookie, getCookie, fetchWithRefresh } from '../../utils/utils';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -29,7 +29,9 @@ export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
 
-export const USER_CHECK = 'USER_CHECK';
+export const USER_CHECK_SUCCESS = 'USER_CHECK_SUCCESS';
+export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS';
+export const USER_AUTH_FAILED = 'USER_AUTH_FAILED';
 
 //Регистрация пользователя
 export function registrationUsers({ name, email, password }) {
@@ -56,7 +58,6 @@ export function registrationUsers({ name, email, password }) {
             .then(checkResponse)
             .then((res) => {
                 if (res && res.success) {
-                    console.log(res)
                     const authToken = res.accessToken.split('Bearer ')[1]
                     const refreshToken = res.refreshToken
                     setCookie('token', authToken)
@@ -66,7 +67,7 @@ export function registrationUsers({ name, email, password }) {
                         user: res.user,
                     })
                 } else {
-                    console.log('Error')
+                    console.error('Error')
                     dispatch({
                         type: REGISTER_FAILED,
                     })
@@ -76,7 +77,7 @@ export function registrationUsers({ name, email, password }) {
                 dispatch({
                     type: REGISTER_FAILED,
                 })
-                console.log('Возникла проблема с вашим запросом', error)
+                console.error('Возникла проблема с вашим запросом', error)
             })
     }
 }
@@ -106,7 +107,6 @@ export function logInUser({ email, password }) {
             .then(checkResponse)
             .then((res) => {
                 if (res && res.success) {
-                    console.log(res)
                     const authToken = res.accessToken.split('Bearer ')[1]
                     const refreshToken = res.refreshToken
                     setCookie('token', authToken)
@@ -128,7 +128,7 @@ export function logInUser({ email, password }) {
                 dispatch({
                     type: LOGIN_FAILED,
                 })
-                console.log('Возникла проблема с вашим запросом', error)
+                console.error('Возникла проблема с вашим запросом', error)
             })
     }
 }
@@ -171,7 +171,7 @@ export function logOutUser() {
                 dispatch({
                     type: LOGOUT_FAILED,
                 })
-                console.log('Возникла проблема с вашим запросом', error)
+                console.error('Возникла проблема с вашим запросом', error)
             })
     }
 }
@@ -182,7 +182,7 @@ export function getUserInfo() {
         dispatch({
             type: GET_USERINFO_REQUEST
         })
-        fetch(`${mainUrl}/auth/user`, {
+        fetchWithRefresh(`${mainUrl}/auth/user`, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
@@ -209,7 +209,7 @@ export function getUserInfo() {
                 dispatch({
                     type: GET_USERINFO_FAILED,
                 })
-                console.log('Возникла проблема с вашим запросом', error)
+                console.error('Возникла проблема с вашим запросом', error)
             })
     }
 }
@@ -252,7 +252,7 @@ export function updateUserInfo({ name, email, password }) {
                 dispatch({
                     type: UPDATE_USERINFO_FAILED,
                 })
-                console.log('Возникла проблема с обновлением', error)
+                console.error('Возникла проблема с обновлением', error)
             })
     }
 }
@@ -322,8 +322,38 @@ export const checkUserRegistration = () => async (dispatch) => {
         try {
             await dispatch(getUserInfo())
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
-    await dispatch({ type: 'USER_CHECK' })
+    await dispatch({ type: 'USER_CHECK_SUCCESS' })
+}
+
+//Проверка пользователя на авторизованность в сессии
+export function checkUserAuth() {
+    return function (dispatch) {
+        return fetch(`${mainUrl}/auth/user`, {
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${getCookie('token')}`,
+            },
+        }).then(checkResponse)
+            .then((res) => {
+                if (res && res.success) {
+                    dispatch({
+                        type: USER_AUTH_SUCCESS,
+                        user: res.user,
+                    })
+                } else {
+                    dispatch({
+                        type: USER_AUTH_FAILED
+                    })
+                }
+            })
+        // .catch((error) => {
+        //     dispatch({
+        //         type: USER_AUTH_FAILED,
+        //     })
+        //     console.error('Возникла проблема с вашим запросом', error)
+        // })
+    }
 }
