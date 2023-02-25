@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './feed.module.css';
+import styles from './not-found.module.css';
 import imgNotFound from '../images/not-found.png';
 
 

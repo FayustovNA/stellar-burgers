@@ -13,7 +13,7 @@ import ResetPassword from '../../pages/reset-password';
 import Profile from "../../pages/profile"
 import { Routes, Route } from 'react-router-dom';
 import StellarBurgerMain from '../../pages/main-page';
-import FeedOrders from '../../pages/feed';
+import FeedOrders from '../../pages/feed/feed';
 import OrderHistory from '../../pages/order-history';
 import LayOut from '../../pages/layout-profile';
 import NotFound from '../../pages/not-found';
@@ -59,8 +59,7 @@ function App() {
         <DndProvider backend={HTML5Backend}>
 
           <Routes location={background}>
-
-            <Route index element={<StellarBurgerMain />} />
+            <Route path='/' element={<StellarBurgerMain />} />
             <Route path='login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
             <Route path='register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
             <Route path='forgot-password' element={<ProtectedRoute isUnAuth={true}><ForgotPassword /></ProtectedRoute>} />

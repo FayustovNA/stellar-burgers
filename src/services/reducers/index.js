@@ -4,6 +4,8 @@ import { orderNumberReducer } from './order-details';
 import { modalWindowReducer } from './modal-window';
 import { currentIngredientsReducer } from './burger-ingredients';
 import { authReducer } from './auth';
+import wsReducer from './wsReducer';
+
 
 import {
     GET_INGREDIENTS_REQUEST,
@@ -56,5 +58,6 @@ export const rootReducer = combineReducers({
     order: orderNumberReducer,
     modal: modalWindowReducer,
     current: currentIngredientsReducer,
-    auth: authReducer
+    auth: authReducer,
+    wsocket: wsReducer,
 });
