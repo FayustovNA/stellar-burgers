@@ -59,7 +59,6 @@ function App() {
         <DndProvider backend={HTML5Backend}>
 
           <Routes location={background}>
-
             <Route path='/' element={<StellarBurgerMain />} />
             <Route path='login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
             <Route path='register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
