@@ -1,4 +1,4 @@
-Проект. Практика Redux и React DND
+Проект: CRA-заготовка и вёрстка главной Stellar Burger
 Яндекс Практикум 
 Автор: Фаюстов Николай 
-Технологии: CRA, React, JSX, Redux
+Технологии: CRA, React, JSX

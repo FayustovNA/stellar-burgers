@@ -3,7 +3,8 @@ import { constructorReducer } from './burger-constructor';
 import { orderNumberReducer } from './order-details';
 import { modalWindowReducer } from './modal-window';
 import { currentIngredientsReducer } from './burger-ingredients';
-
+import { authReducer } from './auth';
+import wsReducer from './wsReducer';
 
 import {
     GET_INGREDIENTS_REQUEST,
@@ -55,5 +56,7 @@ export const rootReducer = combineReducers({
     maker: constructorReducer,
     order: orderNumberReducer,
     modal: modalWindowReducer,
-    current: currentIngredientsReducer
+    current: currentIngredientsReducer,
+    auth: authReducer,
+    wsocket: wsReducer,
 });

@@ -12,6 +12,11 @@
     text-align: start;
 }
 
+.link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .tab {
     composes: text_type_main-default from global;
     width: 100%;
