@@ -26,24 +26,29 @@ import { UNSET_INGREDIENTS } from '../../services/action/burger-ingredients';
 import { MODALWINDOW_CLOSE_ING } from '../../services/action/modal-window';
 import { useNavigate } from 'react-router-dom';
 import { checkUserAuth } from '../../services/action/auth';
+import FeedOrderModalCard from '../feed-order-modal-card/feed-order-modal-card';
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
+
   const visitedFogotPage = useSelector(store => store.auth.visitedFogotPage);
+
 
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch((checkUserAuth()));
+    dispatch(checkUserAuth());
   }, [])
 
-
-  const background = location.state?.locationIngredient || location;
+  const background =
+    location.state?.locationIngredient ||
+    location.state?.locationFeed ||
+    location;
 
   const handleCloseModal = () => {
-    navigate('/')
+    navigate(-1)
     dispatch({
       type: UNSET_INGREDIENTS,
     })
@@ -59,7 +64,9 @@ function App() {
         <DndProvider backend={HTML5Backend}>
 
           <Routes location={background}>
+
             <Route path='/' element={<StellarBurgerMain />} />
+
             <Route path='login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
             <Route path='register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
             <Route path='forgot-password' element={<ProtectedRoute isUnAuth={true}><ForgotPassword /></ProtectedRoute>} />
@@ -75,6 +82,8 @@ function App() {
             </Route>
 
             <Route path='feed' element={<FeedOrders />} />
+            <Route path='feed/:id' element={<FeedOrderModalCard />} />
+
             <Route path='ingredients/:id' element={<IngredientDetails />} />
             <Route path='*' element={<NotFound />} />
 
@@ -87,6 +96,16 @@ function App() {
                   <Modal
                     onClose={handleCloseModal}>
                     <IngredientDetails />
+                  </Modal>} />
+            </Routes>)}
+
+          {location.state?.locationFeed &&
+            (<Routes>
+              <Route path='/feed/:id'
+                element={
+                  <Modal
+                    onClose={handleCloseModal}>
+                    <FeedOrderModalCard />
                   </Modal>} />
             </Routes>)}
 

@@ -4,10 +4,13 @@ import { wsConnectionStart, wsConnectionClosed } from '../../services/action/wsA
 import { wsUrlAll } from '../../utils/check-response';
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import OrdersList from '../../components/feed-orders-list/feed-orders-list';
+import FeedTotalStatus from '../../components/feed-total-status/feed-total-status';
 
 
 
 function FeedOrders() {
+    const { orders } = useSelector(store => store.wsocket)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,9 +22,13 @@ function FeedOrders() {
 
 
     return (
-        <div className={styles.mainbox}>
-            Страница ленты заказов
-        </div >
+        <main className={styles.mainbox}>
+            <h2 className={styles.title}>Лента заказов</h2>
+            <div className={styles.feedcontainer}>
+                <OrdersList orders={orders} />
+                <FeedTotalStatus />
+            </div>
+        </main >
     );
 }
 

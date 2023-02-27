@@ -38,7 +38,6 @@ const composeEnhancers =
 const enhancer = composeEnhancers(
   applyMiddleware(thunk, socketMiddleware(wsActions)));
 
-
 const store = createStore(rootReducer, enhancer);
 
 
