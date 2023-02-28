@@ -3,7 +3,7 @@ import style from "./feed-orders-list.module.css";
 import { useSelector } from "react-redux";
 import FeedOrderItem from "../feed-order-item/feed-order-item";
 
-export default function OrdersList({ orders }) {
+export default function OrdersList({ orders, isHistory }) {
 
     return (
         <ul className={style.feedlist}>
@@ -12,6 +12,7 @@ export default function OrdersList({ orders }) {
                     <FeedOrderItem
                         key={uuidv4()}
                         order={order}
+                        isHistory={isHistory}
                     />
                 );
             })}

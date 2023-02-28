@@ -14,7 +14,7 @@ import Profile from "../../pages/profile"
 import { Routes, Route } from 'react-router-dom';
 import StellarBurgerMain from '../../pages/main-page';
 import FeedOrders from '../../pages/feed/feed';
-import OrderHistory from '../../pages/order-history';
+import OrderHistory from '../../pages/order-history/order-history';
 import LayOut from '../../pages/layout-profile';
 import NotFound from '../../pages/not-found';
 import { ProtectedRoute } from '../../hooks/protected-route';
@@ -45,6 +45,7 @@ function App() {
   const background =
     location.state?.locationIngredient ||
     location.state?.locationFeed ||
+    location.state?.locationOrderHistory ||
     location;
 
   const handleCloseModal = () => {
@@ -102,6 +103,16 @@ function App() {
           {location.state?.locationFeed &&
             (<Routes>
               <Route path='/feed/:id'
+                element={
+                  <Modal
+                    onClose={handleCloseModal}>
+                    <FeedOrderModalCard />
+                  </Modal>} />
+            </Routes>)}
+
+          {location.state?.locationOrderHistory &&
+            (<Routes>
+              <Route path='/profile/order-history/:id'
                 element={
                   <Modal
                     onClose={handleCloseModal}>

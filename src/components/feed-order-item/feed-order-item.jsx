@@ -6,24 +6,33 @@ import useFeedOrders from "../../hooks/use-feedOrders";
 import FeedOrderItemRow from "../feed-order-item-row/feed-order-item-row";
 
 
-function FeedOrderItem({ order }) {
+function FeedOrderItem({ order, isHistory }) {
     const location = useLocation();
     const { feedOrderPrice, feedOrderIngredients } = useFeedOrders(order);
 
+    const getOrderStatus = (order) => {
+        if (order.status === "done") {
+            return "Выполнен";
+        } else {
+            return "Готовится";
+        }
+    };
 
+    const currentOrderStatus = getOrderStatus(order);
 
     return (
         <li className={style.feeditembox}>
             <Link
                 className={style.link}
-                to={`/feed/${order._id}`}
-                state={{ locationFeed: location }}
+                to={isHistory ? `/profile/order-history/${order._id}` : `/feed/${order._id}`}
+                state={isHistory ? { locationOrderHistory: location } : { locationFeed: location }}
             >
                 <div className={style.feedorderinfo}>
                     <h3 className={style.feedorder_number}>#{order.number}</h3>
                     <p className={style.feedorder_date}><FormattedDate date={new Date(order.createdAt)} /></p>
                 </div >
                 <h2 className={style.feedorder_title}>{order.name}</h2>
+                {isHistory && <p className={style.status}>{currentOrderStatus}</p>}
                 <div className={style.feedordertotal}>
                     <div className={style.feedorder_ingredientsrow}>
                         <FeedOrderItemRow ingredients={feedOrderIngredients} />
@@ -34,7 +43,7 @@ function FeedOrderItem({ order }) {
                     </div>
                 </div>
             </Link>
-        </li>
+        </li >
     )
 
 
