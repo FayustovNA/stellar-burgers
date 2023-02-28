@@ -32,7 +32,7 @@ function FeedOrderModalList({ feedingredients, counterArray }) {
                     </div>
                     <div className={style.item_info}>
                         <p className={style.item_name}>{item.name}</p>
-                        <div className={style.item_totlal}> <p className={style.item_price}>{counterSameIngr(item)}x {item.price} <CurrencyIcon /></p></div>
+                        <div className={style.item_totlal}> <p className={style.item_price}>{counterSameIngr(item)} x {item.price} <CurrencyIcon /></p></div>
                     </div>
                 </div>
             ))

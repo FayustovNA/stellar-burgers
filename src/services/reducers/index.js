@@ -6,7 +6,6 @@ import { currentIngredientsReducer } from './burger-ingredients';
 import { authReducer } from './auth';
 import wsReducer from './wsReducer';
 
-
 import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
