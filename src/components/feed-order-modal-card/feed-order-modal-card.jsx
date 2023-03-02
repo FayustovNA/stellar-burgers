@@ -11,12 +11,44 @@ import { useMemo } from "react";
 
 function FeedOrderModalCard() {
     const { id } = useParams();
+    console.log(id)
+    const ingredients = useSelector(store => store.ingredients.ingredients);
     const orders = useSelector(store => store.wsocket.orders);
-
     const currentOrder = orders.find((item) => item._id === id);
-    console.log(currentOrder)
 
-    const { feedOrderPrice, feedOrderIngredients } = useFeedOrders(currentOrder);
+    console.log(ingredients)
+    console.log(orders)
+
+    // const currentOrder = useMemo(() => {
+    //     return orders.find((item) => item._id === id)
+    // }, [ingredients])
+
+    if (orders.length === 0) {
+        return <h1>Данные загружаются</h1>
+    }
+
+    // const { feedOrderPrice, feedOrderIngredients } = useFeedOrders(currentOrder);
+
+    const feedOrderIngredientes = () => {
+        const Ingredientslist = [];
+        currentOrder.ingredients.forEach((item) => {
+            ingredients.forEach((ingredient) => {
+                if (ingredient._id === item) {
+                    Ingredientslist.push(ingredient);
+                }
+            });
+        });
+
+        return Ingredientslist;
+    };
+
+    //Ингредиенты заказа
+    const feedOrderIngredients = feedOrderIngredientes();
+
+    //Цена заказа
+    const feedOrderPrice = feedOrderIngredients.reduce((count, item) => {
+        return count + item.price;
+    }, 0);
 
     const getOrderStatus = (order) => {
         if (order.status === "done") {

@@ -20,6 +20,9 @@ function FeedOrders() {
         };
     }, [dispatch]);
 
+    if (orders.length === 0) {
+        return <h1>Данные загружаются</h1>
+    }
 
     return (
         <main className={styles.mainbox}>

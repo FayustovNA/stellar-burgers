@@ -8,7 +8,30 @@ import FeedOrderItemRow from "../feed-order-item-row/feed-order-item-row";
 
 function FeedOrderItem({ order, isHistory }) {
     const location = useLocation();
-    const { feedOrderPrice, feedOrderIngredients } = useFeedOrders(order);
+    const ingredients = useSelector(store => store.ingredients.ingredients)
+    // const { feedOrderPrice, feedOrderIngredients } = useFeedOrders(order)
+
+    //Сбор информации о ингредиетах заказа из стора ингредиентов
+    const feedOrderIngredienrs = () => {
+        const Ingredientslist = [];
+        order.ingredients.forEach((item) => {
+            ingredients.forEach((ingredient) => {
+                if (ingredient._id === item) {
+                    Ingredientslist.push(ingredient);
+                }
+            });
+        });
+
+        return Ingredientslist;
+    };
+
+    //Ингредиенты заказа
+    const feedOrderIngredients = feedOrderIngredienrs();
+
+    //Цена заказа
+    const feedOrderPrice = feedOrderIngredients.reduce((count, item) => {
+        return count + item.price;
+    }, 0);
 
     const getOrderStatus = (order) => {
         if (order.status === "done") {
