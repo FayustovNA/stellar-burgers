@@ -26,6 +26,5 @@ export default function useFeedOrders(order) {
         return count + item.price;
     }, 0);
 
-
     return { feedOrderIngredients, feedOrderPrice };
 }

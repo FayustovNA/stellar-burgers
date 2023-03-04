@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import { dataPropTypes } from '../../utils/type';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 
 

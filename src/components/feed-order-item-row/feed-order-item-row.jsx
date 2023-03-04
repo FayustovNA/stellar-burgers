@@ -1,7 +1,4 @@
-import { useSelector } from "react-redux";
 import style from "./feed-order-item-row.module.css";
-import { Link, useLocation } from "react-router-dom";
-import useFeedOrders from "../../hooks/use-feedOrders";
 import RowComponent from "./row-component/row-component";
 
 

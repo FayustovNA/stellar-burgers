@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from "./feed-order-item.module.css";
 import { Link, useLocation } from "react-router-dom";
-import useFeedOrders from "../../hooks/use-feedOrders";
 import FeedOrderItemRow from "../feed-order-item-row/feed-order-item-row";
 
 
