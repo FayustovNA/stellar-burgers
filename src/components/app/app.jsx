@@ -68,9 +68,9 @@ function App() {
 
             <Route path='/' element={<StellarBurgerMain />} />
 
-            <Route path='login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
-            <Route path='register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
-            <Route path='forgot-password' element={<ProtectedRoute isUnAuth={true}><ForgotPassword /></ProtectedRoute>} />
+            <Route path='/login' element={<ProtectedRoute isUnAuth={true}><LogIn /></ProtectedRoute>} />
+            <Route path='/register' element={<ProtectedRoute isUnAuth={true}><Registration /></ProtectedRoute>} />
+            <Route path='/forgot-password' element={<ProtectedRoute isUnAuth={true}><ForgotPassword /></ProtectedRoute>} />
             {visitedFogotPage && <Route path='/reset-password' element={<ProtectedRoute isUnAuth={true}><ResetPassword /></ProtectedRoute>} />}
 
             <Route path='/' element={

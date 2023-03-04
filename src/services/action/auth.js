@@ -34,7 +34,7 @@ export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS';
 export const USER_AUTH_FAILED = 'USER_AUTH_FAILED';
 
 //Регистрация пользователя
-export function registrationUsers({ name, email, password }) {
+export function registrationUsers({ name, email, password }, gotologin) {
     return function (dispatch) {
         dispatch({
             type: REGISTER_REQUEST
@@ -66,6 +66,7 @@ export function registrationUsers({ name, email, password }) {
                         type: REGISTER_SUCCESS,
                         user: res.user,
                     })
+                    gotologin()
                 } else {
                     console.error('Error')
                     dispatch({

@@ -5,6 +5,7 @@ import { modalWindowReducer } from './modal-window';
 import { currentIngredientsReducer } from './burger-ingredients';
 import { authReducer } from './auth';
 import wsReducer from './wsReducer';
+import wsUserReducer from './wsUserReducer';
 
 import {
     GET_INGREDIENTS_REQUEST,
@@ -59,4 +60,5 @@ export const rootReducer = combineReducers({
     current: currentIngredientsReducer,
     auth: authReducer,
     wsocket: wsReducer,
+    wsocketuser: wsUserReducer,
 });

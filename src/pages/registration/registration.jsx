@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { registrationUsers } from '../../services/action/auth';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 function Registration() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [state, setState] = useState({
         name: '',
@@ -34,7 +36,7 @@ function Registration() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(registrationUsers(state))
+        dispatch(registrationUsers(state, () => navigate("/login")));
     }
 
     return (
