@@ -19,6 +19,17 @@ import {
   WS_SEND_ORDERS,
 } from './services/action/wsActionTypes';
 
+import {
+  WS_USER_CONNECTION_START,
+  WS_USER_CONNECTION_SUCCESS,
+  WS_USER_CONNECTION_ERROR,
+  WS_USER_CONNECTION_CLOSE,
+  WS_USER_CONNECTION_CLOSED,
+  WS_USER_GET_ORDERS,
+  WS_USER_SEND_ORDERS,
+} from './services/action/wsUserActionTypes';
+
+
 const wsActions = {
   wsInit: WS_CONNECTION_START,
   onOpen: WS_CONNECTION_SUCCESS,
@@ -29,6 +40,16 @@ const wsActions = {
   wsSendOrders: WS_SEND_ORDERS,
 };
 
+const wsUserActions = {
+  wsInit: WS_USER_CONNECTION_START,
+  onOpen: WS_USER_CONNECTION_SUCCESS,
+  onClose: WS_USER_CONNECTION_CLOSE,
+  onClosed: WS_USER_CONNECTION_CLOSED,
+  onError: WS_USER_CONNECTION_ERROR,
+  onOrders: WS_USER_GET_ORDERS,
+  wsSendOrders: WS_USER_SEND_ORDERS,
+};
+
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -36,8 +57,12 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, socketMiddleware(wsActions)));
-
+  applyMiddleware(
+    thunk,
+    socketMiddleware(wsActions, false),
+    socketMiddleware(wsUserActions, true)
+  )
+);
 
 const store = createStore(rootReducer, enhancer);
 

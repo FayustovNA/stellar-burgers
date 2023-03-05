@@ -11,6 +11,8 @@ function AppHeader() {
     const isFeedList = useMatch({ path: '/feed' })
     const isProfile = useMatch({ path: '/profile' })
     const isProfileOrder = useMatch({ path: 'profile/order-history' })
+    const isProfileOrderId = useMatch({ path: 'profile/order-history/:id' })
+    const isFeedListId = useMatch({ path: '/feed/:id' })
 
     return (
         <header className={styles.header}>
@@ -22,14 +24,14 @@ function AppHeader() {
                     </NavLink>
 
                     <NavLink to='/feed' className={({ isActive }) => isActive ? styles.link_active : styles.link}
-                    ><ListIcon type={isFeedList ? 'primary' : 'secondary'} />
+                    ><ListIcon type={isFeedList || isFeedListId ? 'primary' : 'secondary'} />
                         Лента заказов
                     </NavLink>
                 </ul>
 
                 <ul className={styles.header_lists}>
                     <NavLink to='/profile' className={({ isActive }) => isActive || isProfileOrder ? styles.link_active : styles.link}
-                    ><ProfileIcon type={isProfile || isProfileOrder ? 'primary' : 'secondary'} />
+                    ><ProfileIcon type={isProfile || isProfileOrder || isProfileOrderId ? 'primary' : 'secondary'} />
                         Личный кабинет
                     </NavLink>
                 </ul>
