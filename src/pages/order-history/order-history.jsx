@@ -11,7 +11,7 @@ import { wsUrlProfile } from '../../utils/check-response';
 
 function OrderHistory() {
     const dispatch = useDispatch();
-    const { orders } = useSelector(store => store.wsocketuser);
+    const { loading } = useSelector(store => store.wsocketuser);
 
     useEffect(() => {
         const token = getCookie('token');
@@ -20,6 +20,12 @@ function OrderHistory() {
             dispatch(wsConnectionClosed());
         };
     }, []);
+
+    const { orders } = useSelector(store => store.wsocketuser);
+
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
 
     return (
         < div className={styles.box} >

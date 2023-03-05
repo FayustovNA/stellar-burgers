@@ -9,8 +9,8 @@ import FeedTotalStatus from '../../components/feed-total-status/feed-total-statu
 
 
 function FeedOrders() {
-    const { orders } = useSelector(store => store.wsocket)
     const dispatch = useDispatch();
+    const { loading } = useSelector(store => store.wsocketuser);
 
     useEffect(() => {
         dispatch(wsConnectionStart(wsUrlAll));
@@ -19,6 +19,11 @@ function FeedOrders() {
         };
     }, []);
 
+    const { orders } = useSelector(store => store.wsocket);
+
+    if (loading) {
+        return 'Loading...'
+    }
 
     return (
         <main className={styles.mainbox}>

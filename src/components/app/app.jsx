@@ -28,6 +28,8 @@ import { useNavigate } from 'react-router-dom';
 import { checkUserAuth } from '../../services/action/auth';
 import FeedOrderModalCard from '../feed-order-modal-card/feed-order-modal-card';
 import OrderFullPage from '../../pages/order-full-page/order-full-page';
+import HistoryOrderModalCard from '../history-order-modal-card/history-order-modal-card';
+import OrderHistoryFullPage from '../../pages/order-full-page/order-history-full-page';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +43,7 @@ function App() {
     location;
 
   const visitedFogotPage = useSelector(store => store.auth.visitedFogotPage);
+
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -82,7 +85,7 @@ function App() {
               <Route path='profile/order-history' element={<OrderHistory />} />
             </Route>
 
-            <Route path='profile/order-history/:id' element={<ProtectedRoute isUnAuth={false}><OrderFullPage inProfile={true} /></ProtectedRoute>} />
+            <Route path='profile/order-history/:id' element={<ProtectedRoute isUnAuth={false}><OrderHistoryFullPage /></ProtectedRoute>} />
 
             <Route path='feed' element={<FeedOrders />} />
             <Route path='/feed/:id' element={<OrderFullPage />} />
@@ -118,7 +121,7 @@ function App() {
                 element={
                   <Modal
                     onClose={handleCloseModal}>
-                    <FeedOrderModalCard />
+                    <HistoryOrderModalCard />
                   </Modal>} />
             </Routes>)}
 
