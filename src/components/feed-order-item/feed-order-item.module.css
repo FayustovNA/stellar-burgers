@@ -1,0 +1,116 @@
+.feeditembox {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+    width: 90%;
+    min-width: 540px;
+    /* max-width: 545px; */
+    /* height: 214px; */
+    background: #1C1C21;
+    border-radius: 40px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.feeditembox:hover {
+    border: solid 1px rgba(76, 76, 255, 1);
+    opacity: 0.8;
+    /* border-color: rgba(51, 51, 255, 0.5); */
+
+}
+
+.feedorderinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.feedorder_number {
+    font-family: 'Iceland';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    color: #F2F2F3;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.feedorder_date {
+    font-family: 'JetBrains';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8585AD;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+.feedorder_title {
+    font-family: 'JetBrains';
+    display: flex;
+    text-align: left;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    padding: 0;
+    display: flex;
+    margin: 24px 0 10px 0;
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.feedordertotal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Iceland';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    color: #F2F2F3;
+    padding: 0;
+    margin: 0;
+    justify-content: space-between;
+    height: 64px;
+    position: relative;
+}
+
+.feedorderprice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.feedorder_ingredientsrow {
+    text-decoration: none;
+}
+
+.status {
+    font-family: 'JetBrains';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #00CCCC;
+    display: flex;
+    margin: 0 auto 24px;
+    padding: 0;
+}
