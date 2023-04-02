@@ -1,8 +1,0 @@
-.headerLink {
-    cursor: pointer;
-    display: flex;
-    text-decoration: none;
-    min-width: 180px;
-    gap: 8px;
-    padding: 0;
-}
