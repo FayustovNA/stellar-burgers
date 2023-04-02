@@ -398,7 +398,7 @@ export function forgotPassword(email: { email: string }, resetpage: any) {
 
 //Восстановление пароля
 export function resetPassword(password: string, token: string, navigate?: any) {
-    (dispatch: AppDispatch) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: RESET_PASSWORD_REQUEST,
         })
