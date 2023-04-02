@@ -1,0 +1,11 @@
+.box {
+    text-align: center;
+    width: 844px;
+    padding: 0;
+    margin: 0 auto 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 916px;
+}
