@@ -6,7 +6,7 @@ function PlaceHolder({ }) {
 
     return (
         <section className={styles.placeholder} >
-            <h2 className={styles.title}> <img className={styles.img} src={img} > </img><BurgerIcon type={'primary'} /> Перетащите булку и ингредиенты для вашего бургера </h2>
+            <h2 className={styles.title}> <img className={styles.img} src={img} alt='placeholder' /><BurgerIcon type={'primary'} /> Перетащите булку и ингредиенты для вашего бургера </h2>
         </section >);
 }
 
