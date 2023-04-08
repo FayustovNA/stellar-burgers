@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, useEffect, ChangeEvent } from 'react';
+import React, { FormEvent, useState, useEffect, ChangeEvent, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from '../../services/hooks';
 import styles from './login.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,7 +9,7 @@ import { useCallback } from 'react';
 import { useAuth } from '../../hooks/use-auth';
 
 type TCb = (
-    e: any,
+    e: SyntheticEvent,
 ) => any
 
 const LogIn = () => {

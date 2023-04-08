@@ -9,12 +9,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
-function OrderFullPage() {
+const OrderFullPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(getIngredients());
+        // dispatch(getIngredients());
         dispatch(wsConnectionStart(wsUrlAll))
         return () => {
             dispatch(wsConnectionClosed());

@@ -16,7 +16,8 @@ export const socketMiddleware = (wsActions: IWebSocket, isAuth: boolean): Middle
 
             const { wsInit, onOpen, onClose, onClosed, onError, onOrders, wsSendOrders } = wsActions;
 
-            const token = getCookie('token');
+
+            const token = isAuth ? getCookie('token') : null;
 
             if (type === wsInit) {
                 url = payload;
@@ -34,16 +35,22 @@ export const socketMiddleware = (wsActions: IWebSocket, isAuth: boolean): Middle
 
 
                 socket.onmessage = event => {
-                    const { data } = event;
-                    const parsedData = JSON.parse(data);
-                    const { success, ...restParsedData } = parsedData;
 
-                    if (restParsedData.message === "Invalid or missing token") {
-                        dispatch(refreshToken())
+                    const data = JSON.parse(event.data)
+                    if (data.success) {
+                        dispatch({ type: onOrders, payload: data })
                     } else {
-                        dispatch({ type: onOrders, payload: restParsedData });
+                        socket!.close()
                     }
+                    // const { data } = event;
+                    // const parsedData = JSON.parse(data);
+                    // const { success, ...restParsedData } = parsedData;
 
+                    // if (restParsedData.message === "Invalid or missing token" || "Token is invalid") {
+                    //     dispatch(refreshToken())
+                    // } else {
+                    //     dispatch({ type: onOrders, payload: restParsedData });
+                    // }
                 };
 
                 socket.onclose = event => {

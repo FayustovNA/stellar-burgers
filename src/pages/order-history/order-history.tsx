@@ -14,7 +14,8 @@ function OrderHistory() {
     const { loading } = useSelector(store => store.wsocketuser);
 
     useEffect(() => {
-        const token = getCookie('token');
+        const token = getCookie('token')
+        console.log(token)
         dispatch(wsConnectionStart(`${wsUrlProfile}?token=${token}`));
         return () => {
             dispatch(wsConnectionClosed());
@@ -23,7 +24,7 @@ function OrderHistory() {
 
     const { orders } = useSelector(store => store.wsocketuser);
 
-    if (loading) {
+    if (orders.length === 0) {
         return <h1>Loading...</h1>
     }
 

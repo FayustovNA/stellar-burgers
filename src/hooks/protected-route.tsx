@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useSelector } from '../services/hooks';
 
 interface IProtectedRoute {
-    children: any;
+    children: JSX.Element | any;
     isUnAuth?: boolean;
 }
 

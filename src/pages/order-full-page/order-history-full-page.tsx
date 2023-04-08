@@ -15,7 +15,7 @@ function OrderHistoryFullPage() {
     const { email } = useSelector(state => state.auth);
 
     useEffect(() => {
-        dispatch(getIngredients());
+        // dispatch(getIngredients());
         const token = getCookie('token');
         dispatch(wsConnectionStart(`${wsUrlProfile}?token=${token}`));
         return () => {

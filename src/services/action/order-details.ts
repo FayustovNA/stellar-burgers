@@ -9,6 +9,9 @@ import {
     ORDER_CHECKOUT_REQUEST
 } from '../constans/order-details';
 
+import { CLEAN_ORDER } from '../constans/burger-constructor';
+import { ICleanOrder } from './burger-constructor';
+
 export interface IOrderChekoutRequest {
     readonly type: typeof ORDER_CHECKOUT_REQUEST
 }
@@ -25,6 +28,7 @@ export interface IOrderChekoutFailed {
 export interface IOrderChekoutClean {
     readonly type: typeof ORDER_CHECKOUT_CLEAN
 }
+
 
 export type TOrderAction =
     | IOrderChekoutRequest
@@ -58,6 +62,13 @@ const OrderChekoutClean = (): IOrderChekoutClean => {
     }
 }
 
+const OrderClean = (): ICleanOrder => {
+    return {
+        type: CLEAN_ORDER
+    }
+}
+
+
 export function getOrderDetails(ingredients: Array<string>) {
     return function (dispatch: AppDispatch) {
         dispatch(OrderChekoutRequest());
@@ -78,6 +89,7 @@ export function getOrderDetails(ingredients: Array<string>) {
             })
 
             .then((res) => {
+                dispatch(OrderClean())
                 dispatch(OrderChekoutClean())
             })
 

@@ -1,5 +1,5 @@
 import { checkResponse, mainUrl } from '../../utils/check-response';
-import { setCookie, deleteCookie, getCookie, fetchWithRefresh } from '../../utils/utils';
+import { setCookie, deleteCookie, getCookie, fetchWithRefresh, refreshToken } from '../../utils/utils';
 import { AppDispatch, AppThunk } from '../types/index';
 import { IRegisterUser, ILoginUser, IUser } from '../types/data';
 import {
@@ -12,6 +12,7 @@ import {
     RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED,
     USER_CHECK_SUCCESS, USER_AUTH_SUCCESS, USER_AUTH_FAILED
 } from '../constans/auth';
+import { TUserRegisterResponse } from '../types/data';
 
 
 export interface IRegisterRequest {
@@ -142,6 +143,115 @@ export type TUserActions =
     | IUserCheckSuccess
     | IUserAuthFaild;
 
+export const registerRequest = (): IRegisterRequest => ({
+    type: REGISTER_REQUEST,
+})
+
+export const registerSuccess = (
+    user: IRegisterUser
+): IRegisterSuccess => ({
+    type: REGISTER_SUCCESS,
+    user,
+})
+
+export const registerFailed = (): IRegisterFailed => ({
+    type: REGISTER_FAILED,
+})
+
+export const getUserInfoRequest = (): IGetUserInfoRequest => ({
+    type: GET_USERINFO_REQUEST,
+})
+
+export const getUserInfoRequestSuccess = (user: IUser): IGetUserInfoSuccess => ({
+    type: GET_USERINFO_SUCCESS,
+    user,
+})
+
+export const getUserInfoRequestFailed = (): IGetUserInfoFailed => ({
+    type: GET_USERINFO_FAILED,
+})
+
+export const loginRequest = (): ILoginRequest => ({
+    type: LOGIN_REQUEST,
+})
+
+export const loginSuccess = (user: ILoginUser): ILoginSuccess => ({
+    type: LOGIN_SUCCESS,
+    user,
+})
+
+export const loginFailed = (): ILoginFaild => ({
+    type: LOGIN_FAILED,
+})
+
+export const logoutRequest = (): ILogoutRequest => ({
+    type: LOGOUT_REQUEST,
+})
+
+export const logoutSuccess = (): ILogoutSuccess => ({
+    type: LOGOUT_SUCCESS,
+})
+
+export const logoutFailed = (): ILogoutFailed => ({
+    type: LOGOUT_FAILED,
+})
+
+
+export const updateUserRequest = (): IUpdateUserRequest => ({
+    type: UPDATE_USERINFO_REQUEST,
+})
+
+export const updateUserSuccess = (
+    user: IUser
+): IUpdateUserSuccess => ({
+    type: UPDATE_USERINFO_SUCCESS,
+    user,
+})
+
+export const updateUserFailed = (): IUpdateUserFaild => ({
+    type: UPDATE_USERINFO_FAILED,
+})
+
+export const forgotPasswordRequest = (): IForgotPasswordRequest => ({
+    type: FORGOT_PASSWORD_REQUEST,
+})
+
+export const forgotPasswordSuccess = (
+): IForgotPasswordSuccess => ({
+    type: FORGOT_PASSWORD_SUCCESS,
+})
+
+export const forgotPasswordFailed = (): IForgotPasswordFailed => ({
+    type: FORGOT_PASSWORD_FAILED,
+})
+
+export const resetPasswordAction = (): IResetPasswordRequest => ({
+    type: RESET_PASSWORD_REQUEST,
+})
+
+export const resetPasswordSuccessAction = (): IResetPasswordSuccess => ({
+    type: RESET_PASSWORD_SUCCESS,
+})
+
+export const resetPasswordFailedAction = (): IResetPasswordFailed => ({
+    type: RESET_PASSWORD_FAILED,
+})
+
+export const userAuthSuccess = (user: IUser): IUserAuthSuccess => ({
+    type: USER_AUTH_SUCCESS,
+    user
+})
+
+export const userCheckSuccess = (user: IUser): IUserCheckSuccess => ({
+    type: USER_CHECK_SUCCESS,
+    user
+})
+
+
+export const userAuthFaild = (): IUserAuthFaild => ({
+    type: USER_AUTH_FAILED,
+})
+
 
 //Регистрация пользователя
 export function registrationUsers({ name, email, password }: IRegisterUser, gotologin: any) {
@@ -166,7 +276,7 @@ export function registrationUsers({ name, email, password }: IRegisterUser, goto
             })
         })
             .then(checkResponse)
-            .then((res: any) => {
+            .then((res) => {
                 if (res && res.success) {
                     const authToken = res.accessToken.split('Bearer ')[1]
                     const refreshToken = res.refreshToken
@@ -192,6 +302,7 @@ export function registrationUsers({ name, email, password }: IRegisterUser, goto
             })
     }
 }
+
 
 //Логирование в личный кабинет
 export function logInUser({ email, password }: ILoginUser) {
@@ -288,12 +399,10 @@ export function logOutUser() {
 }
 
 //Получение данных пользователя
-export function getUserInfo() {
-    return function (dispatch: AppDispatch) {
-        dispatch({
-            type: GET_USERINFO_REQUEST
-        })
-        fetchWithRefresh(`${mainUrl}/auth/user`, {
+export const getUserInfo: AppThunk = () =>
+    (dispatch: AppDispatch) => {
+        dispatch(getUserInfoRequest())
+        fetchWithRefresh<TUserRegisterResponse>(`${mainUrl}/auth/user`, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
@@ -303,26 +412,21 @@ export function getUserInfo() {
                 Authorization: 'Bearer ' + getCookie('token'),
             },
         })
-            .then((res: any) => {
+            .then((res) => {
                 if (res && res.success) {
                     dispatch({
                         type: GET_USERINFO_SUCCESS,
                         user: res.user,
                     })
                 } else {
-                    dispatch({
-                        type: GET_USERINFO_FAILED
-                    })
+                    dispatch(getUserInfoRequestFailed())
                 }
             })
             .catch((error) => {
-                dispatch({
-                    type: GET_USERINFO_FAILED,
-                })
+                dispatch(getUserInfoRequestFailed())
                 console.error('Возникла проблема с вашим запросом', error)
             })
     }
-}
 
 //Обновление данных пользователя
 export function updateUserInfo({ name, email, password }: IRegisterUser) {
@@ -459,11 +563,10 @@ export function checkUserAuth() {
                     })
                 }
             })
-        // .catch((error) => {
-        //     dispatch({
-        //         type: USER_AUTH_FAILED,
-        //     })
-        //     console.error('Возникла проблема с вашим запросом', error)
-        // })
+            .catch((error) => {
+                if (error.message === 'Token is invalid' || "jwt expired" || "jwt malformed" || 'Token is invalid') {
+                    dispatch(refreshToken());
+                }
+            })
     }
 }

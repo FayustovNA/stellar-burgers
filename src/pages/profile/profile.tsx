@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, SyntheticEvent } from 'react';
 import styles from './profile.module.css';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import { TICons } from '@ya.praktikum/react-developer-burger-ui-components/dist/
 
 
 const Profile = () => {
+    //@ts-ignore
     const currentUserName = useSelector(store => store.auth.name)
     const currentUserEmail = useSelector(store => store.auth.email)
     const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Profile = () => {
         })
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
         dispatch(updateUserInfo(state))
     }

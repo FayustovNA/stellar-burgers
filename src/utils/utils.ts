@@ -43,13 +43,14 @@ export const refreshToken = (): any => {
     return fetch(`${mainUrl}/auth/token`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8',
+            'Content-Type': "application/json"
         },
         body: JSON.stringify({
             token: localStorage.getItem('refreshToken'),
         }),
     }).then(checkResponse)
 }
+
 
 export const fetchWithRefresh = async<T>(
     url: string,

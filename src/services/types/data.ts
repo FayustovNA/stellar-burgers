@@ -16,11 +16,19 @@ export interface IUser {
     name: string;
     password?: string;
 }
+
+export type TUserRegisterResponse = {
+    success: boolean
+    user: IRegisterUser
+    accessToken: string
+    refreshToken: string
+}
+
 //////!!!!!!
 export interface IUserInitialState {
-    name: any;
+    name: string | any;
     email: string;
-    password: any;
+    password: string | any;
     token: string;
     visitedFogotPage: boolean;
     isUserCheked: boolean;
@@ -63,10 +71,10 @@ export type TIngredientsInitialState = {
 export type TIngredientWithKey = IIngredient & { key: string }
 
 export type TConstructorInitialState = {
-    totalSumm: any
-    bun: any,
-    otherIngredients: any,
-    counters: any,
+    totalSumm: number | any
+    bun: any
+    otherIngredients: any
+    counters: any
     prevBunPrice: number
 }
 
@@ -99,7 +107,7 @@ export type TWsInitialState = {
     total: number
     totalToday: number
     errorType?: null | string
-    loading?: any
+    loading?: boolean | any
 }
 
 export interface IWebSocket {
