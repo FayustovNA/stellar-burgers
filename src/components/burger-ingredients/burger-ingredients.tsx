@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback, FC } from 'react';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import styles from './burger-ingredients.module.css';
 import CardIngredient from '../cards-ingredients/cards-ingredients';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,6 +9,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { MODALWINDOW_OPEN_ING, MODALWINDOW_CLOSE_ING } from '../../services/constans/modal-window';
 import { UNSET_INGREDIENTS, SET_INGREDIENTS } from '../../services/constans/burger-ingredients';
 import { Link, useLocation } from 'react-router-dom';
+import { IIngredient } from '../../services/types/data';
 
 
 const BurgerIngredients: FC = ({ }) => {
@@ -45,7 +46,7 @@ const BurgerIngredients: FC = ({ }) => {
 
 
     // Закрытие и открытие модальных окон
-    function handleOpenModal(item: any) {
+    function handleOpenModal(item: IIngredient) {
         dispatch({
             type: SET_INGREDIENTS,
             item: item
@@ -133,7 +134,7 @@ const BurgerIngredients: FC = ({ }) => {
                             key={card._id}
                             to={`/ingredients/${card._id}`}
                             state={{ locationIngredient: location }}>
-                            <CardIngredient key={uuidv4()} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
+                            <CardIngredient key={card._id} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
                         </Link>)}
                 </div>
                 <div className={styles.listingr} ref={sauceRef}>
@@ -143,7 +144,7 @@ const BurgerIngredients: FC = ({ }) => {
                             key={card._id}
                             to={`/ingredients/${card._id}`}
                             state={{ locationIngredient: location }}>
-                            <CardIngredient key={uuidv4()} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
+                            <CardIngredient key={card._id} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
                         </Link>)}
                 </div>
                 <div className={styles.listingr} ref={mainRef}>
@@ -153,7 +154,7 @@ const BurgerIngredients: FC = ({ }) => {
                             key={card._id}
                             to={`/ingredients/${card._id}`}
                             state={{ locationIngredient: location }}>
-                            <CardIngredient key={uuidv4()} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
+                            <CardIngredient key={card._id} counts={countIngredients.get(card._id)} data={card} onClick={(card) => handleOpenModal(card)} />
                         </Link>)}
                 </div>
 

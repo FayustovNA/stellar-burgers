@@ -35,9 +35,9 @@ const AppHeader: FC = () => {
                         Личный кабинет
                     </NavLink>
                 </ul>
-                <span className={styles.header_logo}>
+                <NavLink to='/' className={styles.header_logo}>
                     <Logo />
-                </span>
+                </NavLink>
             </nav>
         </header >
     );

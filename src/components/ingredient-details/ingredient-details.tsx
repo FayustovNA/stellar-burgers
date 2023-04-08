@@ -3,6 +3,7 @@ import styles from './ingredient-details.module.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { FC } from "react";
+import { IIngredient } from '../../services/types/data';
 
 
 
@@ -14,7 +15,7 @@ const IngredientDetails = () => {
 
 
     if (ingredients.length === 0) {
-        return <h1>Данные загружаются</h1>
+        return <h1>Loading...</h1>
     }
 
     const image = (

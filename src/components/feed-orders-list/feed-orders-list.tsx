@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import style from "./feed-orders-list.module.css";
 import FeedOrderItem from "../feed-order-item/feed-order-item";
 import { FC } from "react";
@@ -13,10 +13,10 @@ const OrdersList: FC<IOrdersList> = ({ orders, isHistory }) => {
 
     return (
         <ul className={style.feedlist}>
-            {orders.map((order) => {
+            {orders.map((order, index) => {
                 return (
                     <FeedOrderItem
-                        key={uuidv4()}
+                        key={index}
                         order={order}
                         isHistory={isHistory}
                     />

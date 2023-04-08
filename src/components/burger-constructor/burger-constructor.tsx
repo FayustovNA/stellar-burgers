@@ -24,6 +24,7 @@ type TCallback = (
 
 const BurgerConstructor: FC = () => {
     const { bun, otherIngredients, totalSumm } = useSelector(store => store.maker);
+    console.log(bun)
     const isOpenOrd = useSelector(store => store.modal.isOpenOrd);
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -29,6 +29,8 @@ import FeedOrderModalCard from '../feed-order-modal-card/feed-order-modal-card';
 import OrderFullPage from '../../pages/order-full-page/order-full-page';
 import HistoryOrderModalCard from '../history-order-modal-card/history-order-modal-card';
 import OrderHistoryFullPage from '../../pages/order-full-page/order-history-full-page';
+import { Link } from 'react-router-dom';
+import { checkUserRegistration } from '../../services/action/auth';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -46,8 +48,8 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch(checkUserAuth());
-  }, [])
+    dispatch(checkUserRegistration());
+  }, [dispatch])
 
 
   const handleCloseModal = () => {
@@ -111,18 +113,18 @@ const App: FC = () => {
                 element={
                   < Modal
                     onClose={handleCloseModal} >
-                    <FeedOrderModalCard />
+                    <OrderFullPage />
                   </Modal>} />
             </Routes>)}
 
           {
             location.state?.locationOrderHistory &&
-            (<Routes>
+            (<Routes >
               <Route path='/profile/order-history/:id'
                 element={
                   < Modal
                     onClose={handleCloseModal} >
-                    <HistoryOrderModalCard />
+                    <OrderHistoryFullPage />
                   </Modal>} />
             </Routes>)}
 

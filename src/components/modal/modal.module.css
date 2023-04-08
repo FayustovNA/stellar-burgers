@@ -3,6 +3,9 @@
     position: relative;
     width: 720px;
     border-radius: 40px;
+    min-height: 300px;
+    min-width: 300px;
+    display: flex;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -19,8 +22,11 @@
 }
 
 .modal_content {
+    margin: auto;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    justify-self: center;
 }

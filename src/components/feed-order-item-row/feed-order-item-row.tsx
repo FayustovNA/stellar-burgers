@@ -3,6 +3,7 @@ import RowComponent from "./row-component/row-component";
 import { useDispatch, useSelector } from '../../services/hooks';
 import { FC } from "react";
 import { IOrder } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 interface IFeedOrderItemRow {
     ingredients: Array<IOrder>;

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, FC, ReactNode } from "react";
 
 interface IModal {
-    onClose?: any;
+    onClose?: boolean | string | any;
     children: ReactNode;
 }
 
