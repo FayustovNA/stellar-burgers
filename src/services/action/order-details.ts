@@ -11,6 +11,7 @@ import {
 
 import { CLEAN_ORDER } from '../constans/burger-constructor';
 import { ICleanOrder } from './burger-constructor';
+import { TOrder } from '../types/data';
 
 export interface IOrderChekoutRequest {
     readonly type: typeof ORDER_CHECKOUT_REQUEST
@@ -18,7 +19,7 @@ export interface IOrderChekoutRequest {
 
 export interface IOrderChekoutSuccess {
     readonly type: typeof ORDER_CHECKOUT_SUCCESS;
-    readonly orderdetails: any;
+    readonly orderdetails: TOrder;
 }
 
 export interface IOrderChekoutFailed {
@@ -43,10 +44,10 @@ const OrderChekoutRequest = (): IOrderChekoutRequest => {
     }
 }
 
-const OrderChekoutSuccess = (orderNumber: any): IOrderChekoutSuccess => {
+const OrderChekoutSuccess = (order: TOrder): IOrderChekoutSuccess => {
     return {
         type: ORDER_CHECKOUT_SUCCESS,
-        orderdetails: orderNumber,
+        orderdetails: order,
     }
 }
 
@@ -72,6 +73,7 @@ const OrderClean = (): ICleanOrder => {
 export function getOrderDetails(ingredients: Array<string>) {
     return function (dispatch: AppDispatch) {
         dispatch(OrderChekoutRequest());
+        dispatch(OrderChekoutClean());
 
         fetch(`${mainUrl}/orders`, {
             method: 'POST',
@@ -90,7 +92,6 @@ export function getOrderDetails(ingredients: Array<string>) {
 
             .then((res) => {
                 dispatch(OrderClean())
-                dispatch(OrderChekoutClean())
             })
 
             .catch((error) => {

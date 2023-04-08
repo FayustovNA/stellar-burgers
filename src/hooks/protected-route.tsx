@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 // import { useAuth } from "./use-auth";
 import { useSelector } from '../services/hooks';
 

@@ -28,7 +28,7 @@ export type TUserRegisterResponse = {
 export interface IUserInitialState {
     name: string | any;
     email: string;
-    password: string | any;
+    password: string | undefined;
     token: string;
     visitedFogotPage: boolean;
     isUserCheked: boolean;

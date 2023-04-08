@@ -105,7 +105,6 @@ export interface IResetPasswordFailed {
 
 export interface IUserAuthSuccess {
     readonly type: typeof USER_AUTH_SUCCESS
-    readonly user: IUser
 }
 
 export interface IUserCheckSuccess {
@@ -237,9 +236,8 @@ export const resetPasswordFailedAction = (): IResetPasswordFailed => ({
     type: RESET_PASSWORD_FAILED,
 })
 
-export const userAuthSuccess = (user: IUser): IUserAuthSuccess => ({
+export const userAuthSuccess = (): IUserAuthSuccess => ({
     type: USER_AUTH_SUCCESS,
-    user
 })
 
 export const userCheckSuccess = (user: IUser): IUserCheckSuccess => ({
@@ -399,8 +397,8 @@ export function logOutUser() {
 }
 
 //Получение данных пользователя
-export const getUserInfo: AppThunk = () =>
-    (dispatch: AppDispatch) => {
+export function getUserInfo() {
+    return function (dispatch: AppDispatch) {
         dispatch(getUserInfoRequest())
         fetchWithRefresh<TUserRegisterResponse>(`${mainUrl}/auth/user`, {
             method: 'GET',
@@ -419,7 +417,7 @@ export const getUserInfo: AppThunk = () =>
                         user: res.user,
                     })
                 } else {
-                    dispatch(getUserInfoRequestFailed())
+                    dispatch(getUserInfoRequestFailed());
                 }
             })
             .catch((error) => {
@@ -427,6 +425,16 @@ export const getUserInfo: AppThunk = () =>
                 console.error('Возникла проблема с вашим запросом', error)
             })
     }
+}
+
+//Проверка был ли пользователь
+export function checkUserRegistration() {
+    return function (dispatch: AppDispatch) {
+        if (getCookie('token')) {
+            dispatch(getUserInfo())
+        } else dispatch({ type: 'USER_AUTH_SUCCESS' })
+    }
+}
 
 //Обновление данных пользователя
 export function updateUserInfo({ name, email, password }: IRegisterUser) {
@@ -528,18 +536,6 @@ export function resetPassword(password: string, token: string, navigate?: any) {
                 })
             })
     }
-}
-
-//Проверка был ли пользователь
-export const checkUserRegistration: AppThunk = () => async (dispatch: any) => {
-    if (getCookie('token')) {
-        try {
-            await dispatch(getUserInfo())
-        } catch (error) {
-            console.error(error)
-        }
-    }
-    await dispatch({ type: 'USER_CHECK_SUCCESS' })
 }
 
 //Проверка пользователя на авторизованность в сессии

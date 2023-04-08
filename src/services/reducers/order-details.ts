@@ -2,6 +2,7 @@ import {
     ORDER_CHECKOUT_REQUEST,
     ORDER_CHECKOUT_SUCCESS,
     ORDER_CHECKOUT_FAILED,
+    ORDER_CHECKOUT_CLEAN,
 } from '../constans/order-details';
 
 import { TOrderAction } from '../action/order-details';
@@ -31,6 +32,14 @@ export const orderNumberReducer = (
                 orderNumber: action.orderdetails,
                 orderNumberRequest: false,
                 orderNumberFailed: false
+            }
+        }
+        case ORDER_CHECKOUT_CLEAN: {
+            return {
+                ...state,
+                orderNumber: [],
+                orderNumberFailed: false,
+                orderNumberRequest: false
             }
         }
         case ORDER_CHECKOUT_FAILED: {

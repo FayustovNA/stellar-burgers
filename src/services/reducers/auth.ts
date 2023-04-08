@@ -30,9 +30,9 @@ import {
     USER_AUTH_SUCCESS,
     USER_AUTH_FAILED,
 
-    // GET_USERINFO_REQUEST,
-    // GET_USERINFO_SUCCESS,
-    // GET_USERINFO_FAILED,
+    GET_USERINFO_REQUEST,
+    GET_USERINFO_SUCCESS,
+    GET_USERINFO_FAILED,
 } from '../constans/auth';
 
 const initialState: IUserInitialState = {
@@ -61,6 +61,12 @@ export const authReducer = (
     switch (action.type) {
 
         case USER_AUTH_SUCCESS:
+            {
+                return {
+                    ...state,
+                    isUserCheked: true,
+                };
+            }
         case USER_CHECK_SUCCESS: {
             return {
                 ...state,
@@ -102,6 +108,7 @@ export const authReducer = (
                 registerFailed: true,
             };
         }
+        case GET_USERINFO_REQUEST:
         case LOGIN_REQUEST: {
             return {
                 ...state,
@@ -109,6 +116,7 @@ export const authReducer = (
                 logInUserFailed: false,
             };
         }
+        case GET_USERINFO_SUCCESS:
         case LOGIN_SUCCESS: {
             return {
                 ...state,
@@ -118,6 +126,7 @@ export const authReducer = (
                 logInUserFailed: false,
             };
         }
+        case GET_USERINFO_FAILED:
         case LOGIN_FAILED: {
             return {
                 ...state,
