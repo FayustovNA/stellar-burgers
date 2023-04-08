@@ -19,7 +19,7 @@ const FeedOrderItem: FC<IFeedOrderItem> = ({ order, isHistory }) => {
 
     //Сбор информации о ингредиетах заказа из стора ингредиентов
     const feedOrderIngredienrs = () => {
-        const Ingredientslist: any = [];
+        const Ingredientslist: Array<IIngredient> = [];
         order.ingredients.forEach((item) => {
             ingredients.forEach((ingredient) => {
                 if (ingredient._id === item) {
@@ -35,7 +35,7 @@ const FeedOrderItem: FC<IFeedOrderItem> = ({ order, isHistory }) => {
     const feedOrderIngredients = feedOrderIngredienrs();
 
     //Цена заказа
-    const feedOrderPrice = feedOrderIngredients.reduce((count: number, item: any) => {
+    const feedOrderPrice = feedOrderIngredients.reduce((count: number, item: IIngredient) => {
         return count + item.price;
     }, 0);
 

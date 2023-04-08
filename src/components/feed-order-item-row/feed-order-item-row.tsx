@@ -6,7 +6,7 @@ import { IOrder } from "../../services/types/data";
 import { IIngredient } from "../../services/types/data";
 
 interface IFeedOrderItemRow {
-    ingredients: Array<IOrder>;
+    ingredients: Array<IOrder> | Array<IIngredient>;
 }
 
 const FeedOrderItemRow: FC<IFeedOrderItemRow> = ({ ingredients }) => {

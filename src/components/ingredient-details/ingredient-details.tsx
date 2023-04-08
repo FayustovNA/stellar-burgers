@@ -12,6 +12,7 @@ const IngredientDetails = () => {
     const ingredients = useSelector((store) => store.ingredients.ingredients);
     const { id } = useParams();
     const currentIngredient: any = ingredients.find((item) => item._id === id);
+    console.log(currentIngredient)
 
 
     if (ingredients.length === 0) {
