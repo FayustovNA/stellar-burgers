@@ -8,13 +8,21 @@
 .title {
     composes: text_type_main-large mt-10 mb-5 from global;
     padding: 0;
-    margin-left: 0px;
+    margin: 0;
     text-align: start;
+    display: flex;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    color: #F2F2F3;
+    padding: 0;
 }
 
 .link {
     text-decoration: none;
     color: #ffffff;
+    background: none;
 }
 
 .tab {

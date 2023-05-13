@@ -43,6 +43,7 @@
     padding: 0;
     top: 20%;
     left: calc(50% - 145px);
+    cursor: pointer;
 }
 
 .link {

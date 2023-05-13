@@ -5,6 +5,7 @@
     height: 208px;
     position: relative;
     cursor: pointer;
+    background: none;
     background-color: none;
 }
 
